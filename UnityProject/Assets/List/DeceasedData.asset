@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351766dcc8d7f8947856701dca4f2be0, type: 3}
+  m_Name: DeceasedData
+  m_EditorClassIdentifier: 
+  deathCauseList:
+  - Old age.
+  - Getting into a gunfight with the pope.
+  - Snakes on a plane.
+  - Swallowing rocks.
+  - Driving on the left side of a 'Keep right' sign.
+  - Running with scissors.
+  - Running with lollipop in the mouth.
+  - Falling piano.
+  - Falling ping-pong table.
+  - Being stupid.
+  - Killed by ninjas.
+  - Killed by zombies.
+  - Killed by pirates.
+  - Space walk ... without a space suit.
+  - Eaten by kittens.
+  - Boredom.
+  - Laughing at his/her own joke.
+  - Didn't share the Bloody Mary chain e-mail to enough contacts
+  - Played too much at Graveyard Manager.
+  - Played too much at Fortnite.
+  - Drowned in a puddle.
+  - Died in a soda geyser.
+  nameList:
+  - Martin
+  - Jules
+  - Elsa
+  - 'Elisa '
+  - Ilene
+  - Brinda
+  - Justine
+  - Darcel
+  - Bastien
+  - Jerome
+  - Maxime
+  - "Timot\xE9"
+  - Guillaume
+  - Tom
+  - Thomas
+  - Laurent
+  - Leo
+  - Kevin
+  - Marie
+  - Lea
+  - Pierre
+  - Mathilde
+  - Nicolas
+  surnameList:
+  - Balfroid
+  - Smith
+  - James
+  - Martin
+  - Gravedigger
+  - Mullers
+  - Fink
+  - Cauz
+  - Fallais
+  - Maitre
+  - Fleur
+  - Tombale
