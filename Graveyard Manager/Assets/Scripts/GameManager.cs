@@ -92,12 +92,14 @@ public class GameManager : MonoBehaviour
         {
             if (deceasedMonth.Count < 4)
             {
-                monthsPassed += 1;
-                UpdateDate();
+                // If there is still body in the morgue generate discontement
                 foreach (Deceased corpse in deceasedMonth)
                 {
-                    ChangeContentment(-Mathf.RoundToInt(RandomBiased(0f, 5f, corpse.VisitChance + 0.5f)));
+                    corpse.StayInMorgue();
+                    ChangeContentment(-Mathf.RoundToInt(RandomBiased(0f, 5f, corpse.VisitChance + 0.5f) * corpse.MonthsSpendMorgue));
                 }
+                monthsPassed += 1;
+                UpdateDate();
                 WhoDieThisMonth();
                 MonthlyVisit();
                 UpdateGraveDisplay();
@@ -200,11 +202,15 @@ public class GameManager : MonoBehaviour
     {
         foreach (KeyValuePair<Vector3Int, Deceased> grave in buried)
         {
+            // Determine if the grave will be visited this months or not
+            // Chances are higher in the first 3 months
             bool isVisited = grave.Value.VisitChance <= RandomBiased(0f, 1f, (grave.Value.GraveAge + 1f) / 3f);
             grave.Value.Visit(isVisited);
             if (isVisited)
             {
-                ChangeContentment(UnityEngine.Random.Range(0, 6));
+                // Each visit the contentment bar refill a little.
+                // Less effective as the months passed.
+                ChangeContentment(Mathf.RoundToInt(RandomBiased(0f, 3f, (grave.Value.GraveAge + 1f) / 3f)));
                 // Change the tile below the grave
                 tileMap.SetTile(grave.Key + Vector3Int.down, horizontalPathWithVisitor);
             }
@@ -239,12 +245,15 @@ public class GameManager : MonoBehaviour
 
     public void ChangeContentment(int amount)
     {
-        contentmentSlider.value += amount;
-        contentmentSlider.GetComponentInChildren<Text>().text = string.Format("{0} %", contentmentSlider.value);
-        if (contentmentSlider.value == 0f)
+        if(!isGameOver)
         {
-            GameOver();
-        }
+            contentmentSlider.value += amount;
+            contentmentSlider.GetComponentInChildren<Text>().text = string.Format("{0} %", contentmentSlider.value);
+            if (contentmentSlider.value == 0f)
+            {
+                GameOver();
+            }
+        }  
     }
 
     public void GameOver()

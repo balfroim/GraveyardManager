@@ -30,6 +30,14 @@ public class Deceased
             return graveAge;
         }
     }
+    private int monthsSpendMorgue = 0;
+    public int MonthsSpendMorgue
+    {
+        get
+        {
+            return monthsSpendMorgue;
+        }
+    }
 
     public Deceased(string _name, string _surname, int _age, string _deathCause, float _visitChance)
     {
@@ -78,6 +86,11 @@ public class Deceased
     public void Age()
     {
         graveAge++;
+    }
+
+    public void StayInMorgue()
+    {
+        monthsSpendMorgue++;
     }
 
     public enum GraveState { Abandoned, Correct, WellMaintain}
