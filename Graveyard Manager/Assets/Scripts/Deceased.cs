@@ -39,16 +39,6 @@ public class Deceased
         }
     }
 
-    public Deceased(string _name, string _surname, int _age, string _deathCause, float _visitChance)
-    {
-        this.name = _name;
-        this.surname = _surname;
-        this.age = _age;
-        this.deathCause = _deathCause;
-        this.visitChance = _visitChance;
-        this.last12thVisits = new List<bool>();
-    }
-
     public Deceased()
     {
         DeceasedData deceasedData = GameManager.instance.deceasedData;
