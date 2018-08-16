@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Object containing all the lists of names, surnames and death causes.
+/// Object containing the lists of names, surnames and death causes.
 /// </summary>
 [CreateAssetMenu(menuName ="DeceasedData")]
 public class DeceasedData : ScriptableObject

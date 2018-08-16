@@ -10,7 +10,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 351766dcc8d7f8947856701dca4f2be0, type: 3}
   m_Name: DeceasedData
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   deathCauseList:
   - Old age.
   - Getting into a gunfight with the pope.
@@ -46,7 +46,7 @@ MonoBehaviour:
   - Bastien
   - Jerome
   - Maxime
-  - "Timot\xE9"
+  - Timote
   - Guillaume
   - Tom
   - Thomas

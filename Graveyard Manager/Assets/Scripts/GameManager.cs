@@ -8,13 +8,18 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    /// <summary>
+    /// Singleton.
+    /// </summary>
     public static GameManager instance;
-    public DeceasedData deceasedData;
+    [SerializeField] public readonly DeceasedData deceasedData;
+    [SerializeField] public readonly Params param;
+
+    [Header("GameObject and their Components")]
     public Text dateText;
-    public GameObject[] profiles;
     public Slider contentmentSlider;
     public Tilemap tileMap;
-    [Header("GameObjects")]
+    public GameObject[] profiles;
     public GameObject dialogPanel;
     public GameObject graveInfo;
     public GameObject rightPanel;
@@ -63,8 +68,6 @@ public class GameManager : MonoBehaviour
         else
             GameObject.Destroy(this.gameObject);
 
-        Screen.SetResolution(1024, 768, Screen.fullScreen);
-
         deceasedMonth = new List<Deceased>();
         WhoDieThisMonth();
         buried = new Dictionary<Vector3Int, Deceased>();
@@ -96,7 +99,7 @@ public class GameManager : MonoBehaviour
                 foreach (Deceased corpse in deceasedMonth)
                 {
                     corpse.StayInMorgue();
-                    ChangeContentment(-Mathf.RoundToInt(RandomBiased(0f, 5f, corpse.VisitChance + 0.5f) * corpse.MonthsSpendMorgue));
+                    ChangeContentment(-Mathf.RoundToInt(RandomBiased(0f, 5f, corpse.VisitChance + 0.5f) * corpse.MorgueTime));
                 }
                 monthsPassed += 1;
                 UpdateDate();
@@ -105,7 +108,7 @@ public class GameManager : MonoBehaviour
                 UpdateGraveDisplay();
                 foreach (KeyValuePair<Vector3Int, Deceased> grave in buried)
                 {
-                    grave.Value.Age();
+                    grave.Value.IncrementGraveAge();
                 }
 
             }
