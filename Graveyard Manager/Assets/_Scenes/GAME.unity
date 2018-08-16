@@ -1761,15 +1761,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deceasedData: {fileID: 11400000, guid: 8af2def784fe0474fb2cdab308e9a6c2, type: 2}
+  param: {fileID: 11400000, guid: 2b87650ddfeef8b459954e1e4b857876, type: 2}
+  tilesData: {fileID: 11400000, guid: a9ac006c518cd58449378746b0f9dde8, type: 2}
   dateText: {fileID: 1526675835}
+  contentmentSlider: {fileID: 1570830973}
+  tileMap: {fileID: 1801727463}
   profiles:
   - {fileID: 1638822909}
   - {fileID: 413384877}
   - {fileID: 686297591}
   - {fileID: 759038290}
-  contentmentSlider: {fileID: 1570830973}
-  tileMap: {fileID: 1801727463}
-  unburyMalusBaseValue: 20
   dialogPanel: {fileID: 1034027734}
   graveInfo: {fileID: 1887296306}
   rightPanel: {fileID: 1934991464}
@@ -1784,13 +1785,6 @@ MonoBehaviour:
   gameTheme: {fileID: 8300000, guid: ddbbdb0c8a0ec8f4b8770bfc0312712d, type: 3}
   menuTrollTheme: {fileID: 8300000, guid: 2c3c5f34ca4d51e488c5b1fa57ec2103, type: 3}
   menuTheme: {fileID: 8300000, guid: 3bdd7bd6d0eaf6b4590a2ae5c649f090, type: 3}
-  emptySpot: {fileID: 11400000, guid: 5421f8ea3a75e01499080c8beb3d7da1, type: 2}
-  correctGrave: {fileID: 11400000, guid: 8c724345a7973574f91d4e7e378153bf, type: 2}
-  wellMaintainGrave: {fileID: 11400000, guid: 67c6ee3e7b7a54848a2dd76425074207, type: 2}
-  abandonedGrave: {fileID: 11400000, guid: db4392f160b59f6409a65f51a5822a9c, type: 2}
-  horizontalPath: {fileID: 11400000, guid: 42cb5f0b5565d6348afeafb48a214951, type: 2}
-  horizontalPathWithVisitor: {fileID: 11400000, guid: 12a2bf802bcab7041a17d3b1c3d2a85e,
-    type: 2}
 --- !u!82 &974446026
 AudioSource:
   m_ObjectHideFlags: 0

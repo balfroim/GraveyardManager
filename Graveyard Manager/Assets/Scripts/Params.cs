@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// All the game parameters.
 /// </summary>
-[CreateAssetMenu(menuName ="Params")]
+[CreateAssetMenu(menuName ="GM/Params")]
 public class Params : ScriptableObject
 {
     [Tooltip("The base value to calculate the malus when a grave is unburied.")]
@@ -16,4 +16,6 @@ public class Params : ScriptableObject
     public float wellMaintainState;
     [Tooltip("The maximum of visit registered in \"Deceased.lastVisits\".")]
     public int maxRegisteredVisits;
+    [Tooltip("How much time for the unbury animation")]
+    public float unburyAnimationPause;
 }

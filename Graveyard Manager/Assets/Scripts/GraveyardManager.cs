@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,6 +6,7 @@ public class GraveyardManager : MonoBehaviour
 {
     private Grid grid;
     private Tilemap tileMap;
+    // On which cell was the mouse over last frame.
     private Vector3Int lastMouseCellPosition;
 
     // Use this for initialization
@@ -23,35 +23,33 @@ public class GraveyardManager : MonoBehaviour
         {
             Vector3Int cellPosition = GetCellUnderMouse();
 
-            // place the grave if it's an empty place
-            if (tileMap.GetTile(cellPosition) == GameManager.instance.emptySpot)
-            {
-                if (GameManager.instance.Bury(cellPosition))
-                {
-                    AudioSource.PlayClipAtPoint(GameManager.instance.burySound, Camera.main.transform.position);
-                    tileMap.SetTile(cellPosition, GameManager.instance.wellMaintainGrave);
-                }
-            }
-            // replace the old grave by a new one
-            else if (tileMap.GetTile(cellPosition) == GameManager.instance.abandonedGrave ||
-                     tileMap.GetTile(cellPosition) == GameManager.instance.correctGrave ||
-                     tileMap.GetTile(cellPosition) == GameManager.instance.wellMaintainGrave)
+            // If there is already someone buried there
+            if (GameManager.instance.IsSomeoneBuriedHere(cellPosition))
             {
                 if (GameManager.instance.Unbury(cellPosition))
                 {
                     StartCoroutine(UnburyAnimation(cellPosition));
                 }
             }
+            else if (tileMap.GetTile(cellPosition) == GameManager.instance.tilesData.emptySpot)
+            {
+                if (GameManager.instance.Bury(cellPosition))
+                {
+                    AudioSource.PlayClipAtPoint(GameManager.instance.burySound, Camera.main.transform.position);
+                    tileMap.SetTile(cellPosition, GameManager.instance.tilesData.wellMaintainGrave);
+                }
+            }
         }
     }
 
+    // TODO: Faire une vraie animation ???
     private IEnumerator UnburyAnimation(Vector3Int cellPosition)
     {
-        tileMap.SetTile(cellPosition, GameManager.instance.emptySpot);
+        tileMap.SetTile(cellPosition, GameManager.instance.tilesData.emptySpot);
         AudioSource.PlayClipAtPoint(GameManager.instance.unburySound, Camera.main.transform.position);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(GameManager.instance.param.unburyAnimationPause);
         AudioSource.PlayClipAtPoint(GameManager.instance.burySound, Camera.main.transform.position);
-        tileMap.SetTile(cellPosition, GameManager.instance.wellMaintainGrave);
+        tileMap.SetTile(cellPosition, GameManager.instance.tilesData.wellMaintainGrave);
     }
 
     private void OnMouseOver()
@@ -62,6 +60,7 @@ public class GraveyardManager : MonoBehaviour
 
             if (GameManager.instance.IsSomeoneBuriedHere(cellPosition))
             {
+                // TODO: Afficher pile au milieu de la tombe
                 Vector3 worldCellPosition = Input.mousePosition;
                 worldCellPosition.z = 0;
                 worldCellPosition.y = worldCellPosition.y - worldCellPosition.y % 64;

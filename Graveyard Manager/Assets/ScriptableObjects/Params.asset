@@ -11,3 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206a6e94712967848a3cd4cb57dd853c, type: 3}
   m_Name: Params
   m_EditorClassIdentifier: 
+  unburyMalus: 25
+  abandonedState: 0.2
+  wellMaintainState: 0.8
+  maxRegisteredVisits: 12

@@ -12,8 +12,10 @@ public class GameManager : MonoBehaviour
     /// Singleton.
     /// </summary>
     public static GameManager instance;
-    [SerializeField] public readonly DeceasedData deceasedData;
-    [SerializeField] public readonly Params param;
+    // TODO: Empêcher de pouvoir modifier en dehors de la classe;
+    public DeceasedData deceasedData;
+    public Params param;
+    public TilesData tilesData;
 
     [Header("GameObject and their Components")]
     public Text dateText;
@@ -32,13 +34,7 @@ public class GameManager : MonoBehaviour
     public AudioClip gameTheme;
     public AudioClip menuTrollTheme;
     public AudioClip menuTheme;
-    [Header("Tiles")]
-    public TileBase emptySpot;
-    public TileBase correctGrave;
-    public TileBase wellMaintainGrave;
-    public TileBase abandonedGrave;
-    public TileBase horizontalPath;
-    public TileBase horizontalPathWithVisitor;
+    
 
     private int monthsPassed = 0;
 
@@ -215,12 +211,12 @@ public class GameManager : MonoBehaviour
                 // Less effective as the months passed.
                 ChangeContentment(Mathf.RoundToInt(RandomBiased(0f, 3f, (grave.Value.GraveAge + 1f) / 3f)));
                 // Change the tile below the grave
-                tileMap.SetTile(grave.Key + Vector3Int.down, horizontalPathWithVisitor);
+                tileMap.SetTile(grave.Key + Vector3Int.down, tilesData.horizontalPathWithVisitor);
             }
             else
             {
                 // Change the tile below the grave
-                tileMap.SetTile(grave.Key + Vector3Int.down, horizontalPath);
+                tileMap.SetTile(grave.Key + Vector3Int.down, tilesData.horizontalPath);
             }
         }
     }
@@ -234,13 +230,13 @@ public class GameManager : MonoBehaviour
             switch (graveState)
             {
                 case Deceased.GraveState.Correct:
-                    tileMap.SetTile(grave.Key, correctGrave);
+                    tileMap.SetTile(grave.Key, tilesData.correctGrave);
                     break;
                 case Deceased.GraveState.WellMaintain:
-                    tileMap.SetTile(grave.Key, wellMaintainGrave);
+                    tileMap.SetTile(grave.Key, tilesData.wellMaintainGrave);
                     break;
                 case Deceased.GraveState.Abandoned:
-                    tileMap.SetTile(grave.Key, abandonedGrave);
+                    tileMap.SetTile(grave.Key, tilesData.abandonedGrave);
                     break;
             }
         }
