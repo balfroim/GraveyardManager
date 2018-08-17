@@ -390,8 +390,10 @@ public class GameManager : MonoBehaviour
             Dialog6();
             // Display Grid
             tileMap.gameObject.transform.parent.gameObject.SetActive(true);
-            pointer.transform.SetParent(GameObject.Find("Tutorial6Pointer").transform);
-            pointer.transform.localPosition = Vector3.zero;
+            Vector3Int firstSpotCellPos = new Vector3Int(-6, 2, 0);
+            Vector3 firstSpotWorldCellPos = tileMap.GetCellCenterWorld(firstSpotCellPos);
+            Vector3 firstSpotScreenCellPos = Camera.main.WorldToScreenPoint(firstSpotWorldCellPos);
+            pointer.transform.position = firstSpotScreenCellPos;
         };
         UnityAction Dialog5 = delegate { Dialog(dialog5, responseContinue, action5, responsePlay, actionPlay);  };
 

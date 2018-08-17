@@ -67,12 +67,9 @@ public class GraveyardManager : MonoBehaviour
 
             if (GameManager.instance.IsSomeoneBuriedHere(cellPosition))
             {
-                // TODO: Afficher pile au milieu de la tombe
-                Vector3 worldCellPosition = Input.mousePosition;
-                worldCellPosition.z = 0;
-                worldCellPosition.y = worldCellPosition.y - worldCellPosition.y % 64;
-                worldCellPosition.x = worldCellPosition.x - worldCellPosition.x % 64;
-                GameManager.instance.DisplayGraveInfo(cellPosition, worldCellPosition);
+                Vector3 worldCellPosition = tileMap.GetCellCenterWorld(cellPosition);
+                Vector3 screenCellPosition = Camera.main.WorldToScreenPoint(worldCellPosition);
+                GameManager.instance.DisplayGraveInfo(cellPosition, screenCellPosition);
             }
             else
             {
