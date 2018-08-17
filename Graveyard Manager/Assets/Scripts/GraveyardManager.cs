@@ -4,22 +4,24 @@ using UnityEngine.Tilemaps;
 
 public class GraveyardManager : MonoBehaviour
 {
-    private Grid grid;
     private Tilemap tileMap;
     // On which cell was the mouse over last frame.
     private Vector3Int lastMouseCellPosition;
+    /// <summary>
+    /// Prevent to bury a grave between an "unburying".
+    /// </summary>
+    private bool onAnimPause = false;
 
     // Use this for initialization
     void Start()
     {
-        grid = GetComponentInParent<Grid>();
         tileMap = GetComponent<Tilemap>();
     }
 
 
     private void OnMouseDown()
     {
-        if (!GameManager.instance.IsGameOver && GameManager.instance.IsGameStarted)
+        if (!GameManager.instance.IsGameOver && GameManager.instance.IsGameStarted && !onAnimPause)
         {
             Vector3Int cellPosition = GetCellUnderMouse();
 
@@ -35,26 +37,31 @@ public class GraveyardManager : MonoBehaviour
             {
                 if (GameManager.instance.Bury(cellPosition))
                 {
-                    AudioSource.PlayClipAtPoint(GameManager.instance.burySound, Camera.main.transform.position);
-                    tileMap.SetTile(cellPosition, GameManager.instance.tilesData.wellMaintainGrave);
+                    BuryAnimation(cellPosition);
                 }
             }
         }
     }
 
-    // TODO: Faire une vraie animation ???
+    private void BuryAnimation(Vector3Int cellPosition)
+    {
+        AudioSource.PlayClipAtPoint(GameManager.instance.audio.burySound, Camera.main.transform.position);
+        tileMap.SetTile(cellPosition, GameManager.instance.tilesData.wellMaintainGrave);
+    }
+
     private IEnumerator UnburyAnimation(Vector3Int cellPosition)
     {
         tileMap.SetTile(cellPosition, GameManager.instance.tilesData.emptySpot);
-        AudioSource.PlayClipAtPoint(GameManager.instance.unburySound, Camera.main.transform.position);
+        AudioSource.PlayClipAtPoint(GameManager.instance.audio.unburySound, Camera.main.transform.position);
+        onAnimPause = true;
         yield return new WaitForSeconds(GameManager.instance.param.unburyAnimationPause);
-        AudioSource.PlayClipAtPoint(GameManager.instance.burySound, Camera.main.transform.position);
-        tileMap.SetTile(cellPosition, GameManager.instance.tilesData.wellMaintainGrave);
+        onAnimPause = false;
+        BuryAnimation(cellPosition);
     }
 
     private void OnMouseOver()
     {
-        if (lastMouseCellPosition != GetCellUnderMouse())
+        if (lastMouseCellPosition != GetCellUnderMouse() && !onAnimPause)
         {
             Vector3Int cellPosition = GetCellUnderMouse();
 

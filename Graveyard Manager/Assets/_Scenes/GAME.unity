@@ -850,7 +850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -162.6725, y: 0}
+  m_AnchoredPosition: {x: -162.67188, y: 0}
   m_SizeDelta: {x: -325.345, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &563831578
@@ -1159,7 +1159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 117.333336, y: -144}
+  m_AnchoredPosition: {x: 117.33325, y: -144}
   m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584654260
@@ -1763,6 +1763,7 @@ MonoBehaviour:
   deceasedData: {fileID: 11400000, guid: 8af2def784fe0474fb2cdab308e9a6c2, type: 2}
   param: {fileID: 11400000, guid: 2b87650ddfeef8b459954e1e4b857876, type: 2}
   tilesData: {fileID: 11400000, guid: a9ac006c518cd58449378746b0f9dde8, type: 2}
+  audio: {fileID: 11400000, guid: 5fea63cd9ae8b9f40b28f82bae4d657f, type: 2}
   dateText: {fileID: 1526675835}
   contentmentSlider: {fileID: 1570830973}
   tileMap: {fileID: 1801727463}
@@ -1780,11 +1781,6 @@ MonoBehaviour:
   - {fileID: 584654258}
   - {fileID: 945257129}
   pointer: {fileID: 1282177676}
-  burySound: {fileID: 8300000, guid: b08a508fbb84ded48bca201d95bed02c, type: 3}
-  unburySound: {fileID: 8300000, guid: b7fad274ddc710e4fab40dfb7fee5bb0, type: 3}
-  gameTheme: {fileID: 8300000, guid: ddbbdb0c8a0ec8f4b8770bfc0312712d, type: 3}
-  menuTrollTheme: {fileID: 8300000, guid: 2c3c5f34ca4d51e488c5b1fa57ec2103, type: 3}
-  menuTheme: {fileID: 8300000, guid: 3bdd7bd6d0eaf6b4590a2ae5c649f090, type: 3}
 --- !u!82 &974446026
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2933,7 +2929,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -162.7, y: 0}
+  m_AnchoredPosition: {x: -162.69922, y: 0}
   m_SizeDelta: {x: 325.3, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1526675835

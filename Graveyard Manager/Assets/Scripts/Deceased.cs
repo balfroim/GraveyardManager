@@ -152,7 +152,7 @@ public class Deceased
     /// <returns></returns>
     public int UnburyMalus()
     {
-        return -1 * Mathf.RoundToInt(GameManager.instance.param.unburyMalus * GameManager.SCurve(this.graveStateRatio));
+        return -1 * Mathf.RoundToInt(GameManager.instance.param.unburyMalus * Utils.SCurve(this.graveStateRatio, GameManager.instance.param.sCurveBeta));
     }
     #endregion
 

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public DeceasedData deceasedData;
     public Params param;
     public TilesData tilesData;
+    public new AudioFiles audio;
 
     [Header("GameObject and their Components")]
     public Text dateText;
@@ -28,13 +29,6 @@ public class GameManager : MonoBehaviour
     public GameObject topPanel;
     public GameObject[] tutoImages;
     public GameObject pointer;
-    [Header("Music & Sound")]
-    public AudioClip burySound;
-    public AudioClip unburySound;
-    public AudioClip gameTheme;
-    public AudioClip menuTrollTheme;
-    public AudioClip menuTheme;
-    
 
     private int monthsPassed = 0;
 
@@ -95,7 +89,7 @@ public class GameManager : MonoBehaviour
                 foreach (Deceased corpse in deceasedMonth)
                 {
                     corpse.StayInMorgue();
-                    ChangeContentment(-Mathf.RoundToInt(RandomBiased(0f, 5f, corpse.VisitChance + 0.5f) * corpse.MorgueTime));
+                    ChangeContentment(-Mathf.RoundToInt(Utils.RandomBiased(0f, 5f, corpse.VisitChance + 0.5f) * corpse.MorgueTime));
                 }
                 monthsPassed += 1;
                 UpdateDate();
@@ -115,7 +109,7 @@ public class GameManager : MonoBehaviour
     {
         // Number of corpses is biased to be more around the high boundary the more the time passed
         // If there is already corpses in the morgue the high boundary is obviously smaller.
-        int numberOfDeath = Mathf.RoundToInt(GameManager.RandomBiased(1f, 4f - deceasedMonth.Count, 24f / (monthsPassed + 1)));
+        int numberOfDeath = Mathf.RoundToInt(Utils.RandomBiased(1f, 4f - deceasedMonth.Count, 24f / (monthsPassed + 1)));
         for (int i = 0; i < numberOfDeath; i++)
         {
             Deceased newCorpse = new Deceased();
@@ -139,14 +133,6 @@ public class GameManager : MonoBehaviour
                 profiles[i].transform.GetChild(0).GetComponentInChildren<Text>().text = deceasedMonth[i].Profile();
             }
         }
-    }
-
-    // Generate a random number between low and high with a bias
-    public static float RandomBiased(float low, float high, float bias)
-    {
-        float r = UnityEngine.Random.Range(0f, 1f);
-        r = Mathf.Pow(r, bias);
-        return low + (high - low) * r;
     }
 
     // Use to bury a corpse
@@ -203,13 +189,13 @@ public class GameManager : MonoBehaviour
         {
             // Determine if the grave will be visited this months or not
             // Chances are higher in the first 3 months
-            bool isVisited = grave.Value.VisitChance <= RandomBiased(0f, 1f, (grave.Value.GraveAge + 1f) / 3f);
+            bool isVisited = grave.Value.VisitChance <= Utils.RandomBiased(0f, 1f, (grave.Value.GraveAge + 1f) / 3f);
             grave.Value.Visit(isVisited);
             if (isVisited)
             {
                 // Each visit the contentment bar refill a little.
                 // Less effective as the months passed.
-                ChangeContentment(Mathf.RoundToInt(RandomBiased(0f, 3f, (grave.Value.GraveAge + 1f) / 3f)));
+                ChangeContentment(Mathf.RoundToInt(Utils.RandomBiased(0f, 3f, (grave.Value.GraveAge + 1f) / 3f)));
                 // Change the tile below the grave
                 tileMap.SetTile(grave.Key + Vector3Int.down, tilesData.horizontalPathWithVisitor);
             }
@@ -312,7 +298,7 @@ public class GameManager : MonoBehaviour
         UnityAction actionQuit = Quit;
         UnityAction actionPlay = delegate {
             isGameStarted = true;
-            GetComponent<AudioSource>().clip = gameTheme;
+            GetComponent<AudioSource>().clip = audio.gameTheme;
             GetComponent<AudioSource>().Play();
             // RIGHT PANEL
             for (int i = 0; i < rightPanel.transform.childCount; i++)
@@ -432,7 +418,7 @@ public class GameManager : MonoBehaviour
         string responseTroll1B = "Erf, the first one was just fine.\nGet back to this one please.";
         UnityAction actionTroll1B = delegate {
             DialogTroll2();
-            GetComponent<AudioSource>().clip = menuTheme;
+            GetComponent<AudioSource>().clip = audio.menuTheme;
             GetComponent<AudioSource>().Play();
         };
         UnityAction DialogTroll1 = delegate { Dialog(dialogTroll1, responseTroll1A, DialogTroll2, responseTroll1B, actionTroll1B); };
@@ -441,7 +427,7 @@ public class GameManager : MonoBehaviour
         string dialog3 = "Before starting this tutorial, I want to thank Bastien for the theme songs.\nDo you like the theme ? ";
         UnityAction action3B = delegate {
             DialogTroll1();
-            GetComponent<AudioSource>().clip = menuTrollTheme;
+            GetComponent<AudioSource>().clip = audio.menuTrollTheme;
             GetComponent<AudioSource>().Play();
         };
         UnityAction Dialog3 = delegate { Dialog(dialog3, responseYes, Dialog4, responseSucks, action3B); };
@@ -456,8 +442,5 @@ public class GameManager : MonoBehaviour
         Dialog(dialog1, responseYes, Dialog2, responseSucks, actionQuit);
     }
 
-    public static float SCurve(float x, float beta = 1.6f)
-    {
-        return 1f / (1f + (Mathf.Pow(x / (1f - x), -beta)));
-    }
+    
 }

@@ -18,4 +18,6 @@ public class Params : ScriptableObject
     public int maxRegisteredVisits;
     [Tooltip("How much time for the unbury animation")]
     public float unburyAnimationPause;
+    [Tooltip("A parameter for the function Utils.SCurve.")]
+    public float sCurveBeta;
 }

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1608c729748478f48855643bc7d0ec65, type: 3}
+  m_Name: Audio
+  m_EditorClassIdentifier: 
+  burySound: {fileID: 8300000, guid: b08a508fbb84ded48bca201d95bed02c, type: 3}
+  unburySound: {fileID: 8300000, guid: b7fad274ddc710e4fab40dfb7fee5bb0, type: 3}
+  gameTheme: {fileID: 8300000, guid: ddbbdb0c8a0ec8f4b8770bfc0312712d, type: 3}
+  menuTrollTheme: {fileID: 8300000, guid: 2c3c5f34ca4d51e488c5b1fa57ec2103, type: 3}
+  menuTheme: {fileID: 8300000, guid: 3bdd7bd6d0eaf6b4590a2ae5c649f090, type: 3}

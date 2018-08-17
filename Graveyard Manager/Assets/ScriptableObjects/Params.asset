@@ -16,3 +16,4 @@ MonoBehaviour:
   wellMaintainState: 0.8
   maxRegisteredVisits: 12
   unburyAnimationPause: 0.25
+  sCurveBeta: 1.6
